@@ -1,55 +1,40 @@
-def garden_operations(operation: str) -> None:
-    if operation == "value_error":
+def garden_operations() -> None:
+    try:
         num: int = int("abc")
-
-    elif operation == "zero_division":
+    except ValueError:
+        print("Testing ValueError...")
+        print("Caught ValueError: invalid literal for int()\n")
+    
+    try:
         res: int = 10 / 0
-
-    elif operation == "file_not_found":
+    except ZeroDivisionError:
+        print("Testing ZeroDivisionError...")
+        print("Caught ZeroDivisionError: division by zero\n")
+    
+    try:
         f = open("missing.txt", "r")
-
-    elif operation == "key_error":
+    except FileNotFoundError:
+        print("Testing FileNotFoundError...")
+        print("Caught FileNotFoundError: No such file 'missing.txt'\n")
+    
+    try:
         person = {"name": "Alice", "garden": "MyGarden"}
-        print(person["plant"])
-
-    elif operation == "multiple":
-        res: int = 10 / 0
-        f1 = open("file.txt", "r")
-
+        print(person["plant"]) 
+    except KeyError as e:
+        print("Testing KeyError...")
+        print(f"Caught KeyError: 'missing\\_{e}'\n")
+    
 
 def test_error_types() -> None:
-    print("Testing ValueError...")
     try:
-        garden_operations("value_error")
-    except ValueError:
-        print("Caught ValueError: invalid literal for int()\n")
-
-    print("Testing ZeroDivisionError...")
-    try:
-        garden_operations("zero_division")
-    except ZeroDivisionError:
-        print("Caught ZeroDivisionError: division by zero\n")
-
-    print("Testing FileNotFoundError...")
-    try:
-        garden_operations("file_not_found")
-    except FileNotFoundError:
-        print("Caught FileNotFoundError: No such file 'missing.txt'\n")
-
-    print("Testing KeyError...")
-    try:
-        garden_operations("key_error")
-    except KeyError as e:
-        print(f"Caught KeyError: missing\\_{e}\n")
-
-    print("Testing multiple errors together...")
-    try:
-        garden_operations("multiple")
+        print("=== Garden Error Types Demo ===\n")
+        garden_operations()
+        res: int = 10 / 0
+        f = open("file.txt", "r")
     except (ValueError, ZeroDivisionError, FileNotFoundError):
+        print("Testing multiple errors together...")
         print("Caught an error, but program continues!\n")
+    finally:
+        print("All error types tested successfully!")
 
-    print("All error types tested successfully!")
-
-
-print("=== Garden Error Types Demo ===\n")
-test_error_types()
+test_error_types()  
