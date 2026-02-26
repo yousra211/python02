@@ -9,11 +9,10 @@ class Plant:
 def water_plants(plant_list: list[Plant]) -> None:
     print("Opening watering system")
     try:
-    for p in plant_list:
-        try:
+        for p in plant_list:
             p.watering()
-        except AttributeError:
-            raise AttributeError("Error: Cannot water None - invalid plant!")
+    except AttributeError:
+        raise AttributeError("Error: Cannot water None - invalid plant!")
     finally:
         print("Closing watering system (cleanup)")
 
