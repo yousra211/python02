@@ -12,7 +12,7 @@ def water_plants(plant_list: list[Plant]) -> None:
         for p in plant_list:
             p.watering()
     except AttributeError:
-        raise AttributeError("Error: Cannot water None - invalid plant!")
+        print("Error: Cannot water None - invalid plant!")
     finally:
         print("Closing watering system (cleanup)")
 
@@ -26,7 +26,7 @@ def test_watering_system() -> None:
 
     plant_list2: list[Plant] = [
         Plant("tomato"),
-        Plant("")
+        None
     ]
     try:
         print("Testing normal watering...")
@@ -40,4 +40,6 @@ def test_watering_system() -> None:
     finally:
         print("\nCleanup always happens, even with errors!")
 
+
+print("=== Garden Watering System ===\n")
 test_watering_system()
