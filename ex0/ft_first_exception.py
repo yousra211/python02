@@ -1,4 +1,7 @@
 def check_temperature(temp_str: str) -> int:
+    """
+    validate that the temperature is within the allowed range for plants
+    """
     try:
         num: int = int(temp_str)
     except ValueError:
@@ -13,7 +16,10 @@ def check_temperature(temp_str: str) -> int:
 
 
 def test_temperature_input() -> None:
-    temp: tuple[int, str, int, int] = (25, "abc", 100, -50)
+    """
+    Test different temperature inputs
+    """
+    temp: tuple[str, ...] = ("25", "abc", "100", "-50")
     for t in temp:
         print(f"Testing temperature: {t}")
         try:

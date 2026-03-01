@@ -1,4 +1,7 @@
 class Plant:
+    """
+    Represents a plant with a name, water level, and sunlight hours.
+    """
     def __init__(
             self, name: str, water_level: int, sunlight_hours: int
             ) -> None:
@@ -10,25 +13,31 @@ class Plant:
 def check_plant_health(
         plant_name: str, water_level: int, sunlight_hours: int
         ) -> None:
+    """
+    Check if a plant is healthy
+    """
     if not plant_name:
         raise ValueError("Error: Plant name cannot be empty!\n")
     elif water_level > 10:
         raise ValueError(f"Error: Water level {water_level}\
-                        is too high (max 10)\n")
+ is too high (max 10)\n")
     elif water_level < 1:
         raise ValueError(f"Error: Water level {water_level}\
-                        is too low (min 1)\n")
+ is too low (min 1)\n")
     elif sunlight_hours < 2:
         raise ValueError(f"Error: Sunlight hours {sunlight_hours}\
-                        is too low (min 2)\n")
+ is too low (min 2)\n")
     elif sunlight_hours > 12:
         raise ValueError(f"Error: Sunlight hours {sunlight_hours}\
-                        is too high (max 12)\n")
+ is too high (max 12)\n")
     else:
         print(f"Plant '{plant_name}' is healthy!\n")
 
 
 def test_plant_checks() -> None:
+    """
+    Test the check_plant_health function with various valid and invalid inputs.
+    """
     p1: Plant = Plant("tomato", 2, 4)
     p2: Plant = Plant(None, 4, 6)
     p3: Plant = Plant("carrots", 15, 4)

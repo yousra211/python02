@@ -1,30 +1,42 @@
 class GardenError(Exception):
+    """
+    Base exception class for all garden-related errors.
+    """
     pass
 
 
 class WaterError(GardenError):
-    def __init__(self, name, water):
+    """
+    Raised when a plant's water level is out of the valid range
+    """
+    def __init__(self, name: str, water: int) -> None:
         if water > 10:
             msg = f"Error checking {name}: Water level {water}\
-                is too high (max 10)"
+ is too high (max 10)"
         else:
             msg = f"Error checking {name}: Water level {water}\
-                is too low (min 1)"
+ is too low (min 1)"
         super().__init__(msg)
 
 
 class SunError(GardenError):
-    def __init__(self, name, sun):
+    """
+    Raised when a plant's sunlight hours are out of the valid range
+    """
+    def __init__(self, name: str, sun: int) -> None:
         if sun > 12:
             msg = f"Error checking {name}: Sunlight hours {sun}\
-                is too high (max 12)\n"
+ is too high (max 12)\n"
         else:
             msg = f"Error checking {name}: Sunlight hours {sun}\
-                is too low (min 2)\n"
+ is too low (min 2)\n"
         super().__init__(msg)
 
 
 class Plant:
+    """
+    Represents a plant with a name, water level, and sunlight hours.
+    """
     def __init__(self, name: str, water: int, sun: int) -> None:
         self.name: str = name
         self.water: int = water
@@ -32,11 +44,17 @@ class Plant:
 
 
 class GardenManager:
+    """
+    Manages a collection of plants for a given garden owner.
+    """
     def __init__(self, owner: str) -> None:
         self.owner: str = owner
         self.plants: list[Plant] = []
 
     def add_plant(self, plant: Plant) -> None:
+        """
+        Add a plant to the garden.
+        """
         if not plant.name:
             raise ValueError("Error adding plant: Plant name cannot be empty!")
         else:
@@ -44,6 +62,9 @@ class GardenManager:
             print(f"Added {plant.name} successfully")
 
     def watering(self, plants: list[Plant]) -> None:
+        """
+        Water all plants in the given list
+        """
         print("Opening watering system")
         try:
             for p in plants:
@@ -52,6 +73,10 @@ class GardenManager:
             print("Closing watering system (cleanup)")
 
     def check_plant_health(self, plant: Plant) -> None:
+        """
+        Check if a plant is healthy based on its water level
+        and sunlight hours.
+        """
         if plant.water > 10:
             raise WaterError(plant.name, plant.water)
         elif plant.water < 1:
@@ -62,18 +87,24 @@ class GardenManager:
             raise SunError(plant.name, plant.sun)
         else:
             print(f"{plant.name}: healthy (water: {plant.water},\
-                  sun: {plant.sun})")
+ sun: {plant.sun})")
 
 
-def enough_water(water_in_trank: int) -> int:
-    if water_in_trank < 50:
+def enough_water(water_in_tank: int) -> int:
+    """
+    Check if there is enough water in the tank.
+    """
+    if water_in_tank < 50:
         raise GardenError("Caught GardenError: Not enough water in tank")
     else:
         return 0
 
 
 def test_garden_management() -> None:
-    g = GardenManager("alice")
+    """
+    Test the GardenManager with various valid and invalid plant data.
+    """
+    g: GardenManager = GardenManager("alice")
 
     plant_data: list[tuple[str, int, int]] = [
         ("tomato", 5, 8),

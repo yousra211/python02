@@ -1,4 +1,7 @@
 def garden_operations() -> None:
+    """
+    Execute operations that raises exceptions and handles them
+    """
     try:
         int("abc")
     except ValueError:
@@ -18,7 +21,7 @@ def garden_operations() -> None:
         print("Caught FileNotFoundError: No such file 'missing.txt'\n")
 
     try:
-        person = {"name": "Alice", "garden": "MyGarden"}
+        person: dict[str, str] = {"name": "Alice", "garden": "MyGarden"}
         print(person["plant"])
     except KeyError as e:
         print("Testing KeyError...")
@@ -26,11 +29,15 @@ def garden_operations() -> None:
 
 
 def test_error_types() -> None:
+    """
+    Test multiple exception handling in a single block.
+    """
     try:
         print("=== Garden Error Types Demo ===\n")
         garden_operations()
         10 / 0
         open("file.txt", "r")
+
     except (ValueError, ZeroDivisionError, FileNotFoundError):
         print("Testing multiple errors together...")
         print("Caught an error, but program continues!\n")

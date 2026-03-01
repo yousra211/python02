@@ -1,12 +1,21 @@
 class Plant:
+    """
+    Represent a plant with its name
+    """
     def __init__(self, name: str) -> None:
         self.name = name
 
     def watering(self) -> None:
+        """
+        Simulate watering the plant.
+        """
         print(f"Watering {self.name}")
 
 
-def water_plants(plant_list: list[Plant]) -> None:
+def water_plants(plant_list: list[Plant | None]) -> None:
+    """
+    Water a list of plants using a simulated watering system.
+    """
     print("Opening watering system")
     try:
         for p in plant_list:
@@ -18,13 +27,16 @@ def water_plants(plant_list: list[Plant]) -> None:
 
 
 def test_watering_system() -> None:
+    """
+    Test the garden watering system with both valid and invalid inputs.
+    """
     plant_list1: list[Plant] = [
         Plant("tomato"),
         Plant("lettuce"),
         Plant("carrots")
     ]
 
-    plant_list2: list[Plant] = [
+    plant_list2: list[Plant | None] = [
         Plant("tomato"),
         None
     ]
